@@ -28,11 +28,12 @@ public class AppService {
 
     @Column(name = "Name")
     @NotNull
+    @Length(min = 1, max = 200)
     private String name;
 
     @Column(name = "Description")
     @NotNull
-    @Length(max = 20000)
+    @Length(min = 1, max = 20000)
     private String description;
 
     @Column(name = "Last_modified")
