@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 public class ApplicationMapper {
 
     public Application applicationCreationRequestToEntity(ApplicationCreationRequest creationRequest) {
-        Application applicationEntity = new Application();
-        applicationEntity.setName(creationRequest.getName());
-        applicationEntity.setAppGroup(creationRequest.getAppGroup());
-        applicationEntity.setAppType(creationRequest.getAppType());
-        applicationEntity.setDescription(creationRequest.getDescription());
-        applicationEntity.setAppCost(creationRequest.getAppCost());
+        Application application = new Application();
+        application.setName(creationRequest.getName());
+        application.setAppGroup(creationRequest.getAppGroup());
+        application.setAppType(creationRequest.getAppType());
+        application.setDescription(creationRequest.getDescription());
+        application.setAppCost(creationRequest.getAppCost());
 
-        return applicationEntity;
+        return application;
     }
 
     public ApplicationCreatedResponse applicationEntityToApplicationCreatedResponse(Application application) {

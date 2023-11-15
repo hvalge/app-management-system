@@ -1,32 +1,30 @@
 package com.example.appmanagementsystem.dto.request;
 
-import jakarta.validation.constraints.DecimalMin;
+import com.example.appmanagementsystem.constants.ServiceSubType;
+import com.example.appmanagementsystem.constants.ServiceType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
-public class ApplicationCreationRequest {
+public class AppServiceCreationRequest {
+
+    @NotNull
+    private UUID appCode;
 
     @NotNull
     @Length(min = 1, max = 200)
     private String name;
 
     @NotNull
-    @Length(min = 1, max = 200)
-    private String appGroup;
+    private ServiceType type;
 
     @NotNull
-    @Length(min = 1, max = 200)
-    private String appType;
+    private ServiceSubType subType;
 
     @NotNull
     @Length(min = 1, max = 20000)
     private String description;
-
-    @NotNull
-    @DecimalMin(value = "0.0")
-    private BigDecimal appCost;
 }

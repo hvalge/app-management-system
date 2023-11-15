@@ -42,8 +42,14 @@ public class AppService {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private ServiceType Type;
+    private ServiceType type;
 
     @Enumerated(EnumType.STRING)
-    private ServiceSubType SubType;
+    private ServiceSubType subType;
+
+    @PreUpdate
+    @PrePersist
+    public void updateLastModified() {
+        lastModified = LocalDateTime.now();
+    }
 }
