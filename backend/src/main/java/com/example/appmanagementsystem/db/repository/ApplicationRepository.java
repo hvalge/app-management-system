@@ -10,9 +10,7 @@ import java.util.UUID;
 
 public interface ApplicationRepository extends JpaRepository<Application, UUID> {
 
-    @Query("SELECT new com.example.appmanagementsystem.dto.response.ApplicationSearchedResponse(" +
-            "a.appCode, a.name, a.appGroup, a.appType, a.description, a.appCost) " +
-            "FROM Application a " +
+    @Query("SELECT a FROM Application a LEFT JOIN FETCH a.appServices " +
             "WHERE LOWER(a.name) LIKE LOWER(CONCAT('%', :name, '%'))")
-    List<ApplicationSearchedResponse> findPartialMatchForApplicationsByName(String name);
+    List<Application> findPartialMatchForApplicationsByName(String name);
 }

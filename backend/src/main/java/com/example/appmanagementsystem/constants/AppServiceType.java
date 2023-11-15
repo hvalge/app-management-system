@@ -1,6 +1,6 @@
 package com.example.appmanagementsystem.constants;
 
-public enum ServiceType {
+public enum AppServiceType {
 
     HTTP,
     SAML,

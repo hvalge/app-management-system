@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -16,4 +17,5 @@ public class ApplicationSearchedResponse {
     private String appType;
     private String description;
     private BigDecimal appCost;
+    private List<AppServiceSearchedResponse> appServices;
 }

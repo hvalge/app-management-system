@@ -1,6 +1,6 @@
 package com.example.appmanagementsystem.constants;
 
-public enum ServiceSubType {
+public enum AppServiceSubType {
     REST,
     SOAP
 }

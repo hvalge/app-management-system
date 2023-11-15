@@ -1,7 +1,7 @@
 package com.example.appmanagementsystem.dto.request;
 
-import com.example.appmanagementsystem.constants.ServiceSubType;
-import com.example.appmanagementsystem.constants.ServiceType;
+import com.example.appmanagementsystem.constants.AppServiceSubType;
+import com.example.appmanagementsystem.constants.AppServiceType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -19,10 +19,10 @@ public class AppServiceCreationRequest {
     private String name;
 
     @NotNull
-    private ServiceType type;
+    private AppServiceType type;
 
     @NotNull
-    private ServiceSubType subType;
+    private AppServiceSubType subType;
 
     @NotNull
     @Length(min = 1, max = 20000)

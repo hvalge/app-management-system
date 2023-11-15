@@ -1,8 +1,8 @@
 package com.example.appmanagementsystem.db.entity;
 
 
-import com.example.appmanagementsystem.constants.ServiceSubType;
-import com.example.appmanagementsystem.constants.ServiceType;
+import com.example.appmanagementsystem.constants.AppServiceSubType;
+import com.example.appmanagementsystem.constants.AppServiceType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -44,10 +44,10 @@ public class AppService {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private ServiceType type;
+    private AppServiceType type;
 
     @Enumerated(EnumType.STRING)
-    private ServiceSubType subType;
+    private AppServiceSubType subType;
 
     @PreUpdate
     @PrePersist
