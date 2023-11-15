@@ -13,7 +13,9 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "App_service")
+@Table(name = "App_service", indexes = {
+        @Index(name = "idx_application_name", columnList = "Name")
+})
 public class AppService {
 
     @Id

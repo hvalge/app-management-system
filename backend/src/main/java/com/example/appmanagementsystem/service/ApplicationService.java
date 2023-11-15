@@ -4,9 +4,12 @@ import com.example.appmanagementsystem.db.entity.Application;
 import com.example.appmanagementsystem.db.repository.ApplicationRepository;
 import com.example.appmanagementsystem.dto.request.ApplicationCreationRequest;
 import com.example.appmanagementsystem.dto.response.ApplicationCreatedResponse;
+import com.example.appmanagementsystem.dto.response.ApplicationSearchedResponse;
 import com.example.appmanagementsystem.mapper.ApplicationMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ApplicationService {
@@ -23,5 +26,9 @@ public class ApplicationService {
     public ApplicationCreatedResponse createApplication(ApplicationCreationRequest creationRequest) {
         Application application = applicationRepository.save(mapper.applicationCreationRequestToEntity(creationRequest));
         return mapper.applicationEntityToApplicationCreatedResponse(application);
+    }
+
+    public List<ApplicationSearchedResponse> searchApplications(String name) {
+        return applicationRepository.findPartialMatchForApplicationsByName(name);
     }
 }

@@ -2,12 +2,12 @@ package com.example.appmanagementsystem.controller;
 
 import com.example.appmanagementsystem.dto.request.ApplicationCreationRequest;
 import com.example.appmanagementsystem.dto.response.ApplicationCreatedResponse;
+import com.example.appmanagementsystem.dto.response.ApplicationSearchedResponse;
 import com.example.appmanagementsystem.service.ApplicationService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/applications")
@@ -20,7 +20,12 @@ public class ApplicationController {
     }
 
     @PostMapping
-    private ApplicationCreatedResponse createApplication(@RequestBody @Valid ApplicationCreationRequest creationRequest) {
+    public ApplicationCreatedResponse createApplication(@RequestBody @Valid ApplicationCreationRequest creationRequest) {
         return applicationService.createApplication(creationRequest);
+    }
+
+    @GetMapping
+    public List<ApplicationSearchedResponse> searchApplications(@RequestParam String name) {
+        return applicationService.searchApplications(name);
     }
 }

@@ -20,7 +20,7 @@ public class AppServiceController {
     }
 
     @PostMapping
-    private AppServiceCreatedResponse createAppService(@RequestBody @Valid AppServiceCreationRequest creationRequest) {
+    public AppServiceCreatedResponse createAppService(@RequestBody @Valid AppServiceCreationRequest creationRequest) {
         return appServiceService.createAppService(creationRequest);
     }
 }
