@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+  frontend:
+    build: ./frontend
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    restart: always
+
   app:
     build: ./backend
     ports:

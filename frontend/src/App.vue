@@ -9,7 +9,7 @@
       <v-btn text @click="currentView = 'AppServiceForm'">Create App Service</v-btn>
     </v-app-bar>
     <v-main>
-      <search-results v-if="currentView === 'SearchApplications'" />
+      <search-applications v-if="currentView === 'SearchApplications'" />
       <search-app-services v-if="currentView === 'SearchAppServices'" />
       <application-form @created="handleCreation" v-if="currentView === 'ApplicationForm'" />
       <app-service-form @created="handleCreation" v-if="currentView === 'AppServiceForm'" />

@@ -26,8 +26,8 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script>
+import { defineComponent } from 'vue';
 import apiService from '../services/apiService';
 
 export default defineComponent({
