@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-text-field v-model="searchQuery" label="Search Applications" @input="searchApplications" outlined></v-text-field>
+    <v-text-field v-model="searchQuery" label="Search Application services" @input="searchApplications" outlined></v-text-field>
     <v-row v-if="applicationResults">
       <v-col cols="12" v-for="app in applicationResults" :key="app.appCode">
         <v-card>
