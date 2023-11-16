@@ -21,7 +21,6 @@ public class AppServiceCreationRequest {
     @NotNull
     private AppServiceType type;
 
-    @NotNull
     private AppServiceSubType subType;
 
     @NotNull

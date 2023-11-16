@@ -5,6 +5,7 @@ import com.example.appmanagementsystem.db.repository.ApplicationRepository;
 import com.example.appmanagementsystem.dto.request.ApplicationCreationRequest;
 import com.example.appmanagementsystem.dto.response.AppServiceSearchedResponse;
 import com.example.appmanagementsystem.dto.response.ApplicationCreatedResponse;
+import com.example.appmanagementsystem.dto.response.ApplicationDropdownResponse;
 import com.example.appmanagementsystem.dto.response.ApplicationSearchedResponse;
 import com.example.appmanagementsystem.mapper.ApplicationMapper;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,10 @@ public class ApplicationService {
         return applications.stream()
                 .map(this::toApplicationSearchedResponse)
                 .collect(Collectors.toList());
+    }
+
+    public List<ApplicationDropdownResponse> getApplicationsForDropdown() {
+        return applicationRepository.findApplicationsForDropdown();
     }
 
     private ApplicationSearchedResponse toApplicationSearchedResponse(Application application) {

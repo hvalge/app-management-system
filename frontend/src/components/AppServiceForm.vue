@@ -1,9 +1,17 @@
 <template>
   <v-container>
-    <v-form @submit.prevent="submitAppService">
+    <v-form ref="form" @submit.prevent="submitAppService">
       <v-row>
         <v-col md="4">
-          <v-text-field v-model="formData.appCode" label="App Code" required></v-text-field>
+          <v-select
+            :items="applications"
+            item-title="name"
+            item-value="appCode"
+            v-model="formData.appCode"
+            label="Select App"
+            :rules="uuidRules"
+            required
+          ></v-select>
         </v-col>
       </v-row>
       <v-row>
@@ -13,66 +21,101 @@
       </v-row>
       <v-row>
         <v-col md="4">
-          <v-text-field v-model="formData.type" label="Type" required></v-text-field>
+          <v-select
+            v-model="formData.type"
+            :items="['HTTP', 'SAML', 'SSH', 'JDBC', 'ODBC']"
+            label="Type"
+            required
+          ></v-select>
         </v-col>
       </v-row>
       <v-row>
         <v-col md="4">
-          <v-text-field v-model="formData.subType" label="SubType" required></v-text-field>
+          <v-select
+            v-model="formData.subType"
+            :items="['REST', 'SOAP']"
+            label="Sub-type"
+          ></v-select>
         </v-col>
       </v-row>
       <v-row>
         <v-col md="4">
-          <v-text-field v-model="formData.description" label="Description" required></v-text-field>
+          <v-textarea
+            v-model="formData.description"
+            :rules="descriptionRules"
+            label="Description"
+            auto-grow
+            rows="3"
+            required
+          ></v-textarea>
         </v-col>
       </v-row>
-      <v-btn type="submit">Create Application</v-btn>
+      <v-btn type="submit">Create App Service</v-btn>
+      <v-alert
+        v-if="error"
+        type="error"
+        dismissible
+        @input="error = null">
+        {{ error }}
+      </v-alert>
     </v-form>
-</v-container>
+  </v-container>
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue';
 import apiService from '../services/apiService';
 
-export default defineComponent({
+export default {
   data() {
-    // TODO: Fetch UUID's and labels for them
-    // TODO: Restrict type, subtype fields.
     return {
       formData: {
-        appCode: '',
-        name: '',
-        type: '',
-        subType: '',
-        description: ''
+        appCode: null,
+        name: null,
+        type: null,
+        subType: null,
+        description: null
       },
-      applications: []
+      applications: [],
+      error: null,
+      nameRules: [
+        v => !!v || 'Field is required',
+        v => (v && v.length <= 200) || 'Name must be less than 200 characters'
+      ],
+      descriptionRules: [
+        v => !!v || 'Description is required',
+        v => (v && v.length <= 20000) || 'Description must be less than 20000 characters'
+      ],
+      uuidRules: [
+        v => !!v || 'App selection is required'
+      ],
     };
   },
   methods: {
     submitAppService() {
-      apiService.createAppService(this.formData)
+      if (this.$refs.form.validate()) {
+        apiService.createAppService(this.formData)
+          .then(response => {
+            console.log('App Service created:', response.data);
+            this.$emit('created');
+            this.$refs.form.reset();
+          })
+          .catch(error => {
+            this.error = error.response?.data?.message || 'Error creating app service';
+          });
+      }
+    },
+    getApplicationsForDropdown() {
+      apiService.getApplicationsForDropdown()
         .then(response => {
-          console.log('App Service created:', response.data);
-          this.$emit('created');
+          this.applications = response.data;
         })
         .catch(error => {
-          console.error('Error creating app service:', error);
-        });
-    },
-    fetchApplications() {
-      apiService.fetchApplications()
-        .then(response => {
-          this.applications = response.data.map((app) => ({
-            name: app.name,
-            appCode: app.appCode
-          }));
+          console.error('Error fetching services:', error);
         });
     }
   },
   mounted() {
-    this.fetchApplications();
+    this.getApplicationsForDropdown();
   }
-});
+};
 </script>

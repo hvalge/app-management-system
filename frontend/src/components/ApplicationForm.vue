@@ -45,11 +45,11 @@ export default {
   data() {
     return {
       formData: {
-        name: '',
-        appGroup: '',
-        appType: '',
-        description: '',
-        appCost: '',
+        name: null,
+        appGroup: null,
+        appType: null,
+        description: null,
+        appCost: null,
       },
       nameRules: [
         v => !!v || 'Field is required',

@@ -2,6 +2,7 @@ package com.example.appmanagementsystem.controller;
 
 import com.example.appmanagementsystem.dto.request.ApplicationCreationRequest;
 import com.example.appmanagementsystem.dto.response.ApplicationCreatedResponse;
+import com.example.appmanagementsystem.dto.response.ApplicationDropdownResponse;
 import com.example.appmanagementsystem.dto.response.ApplicationSearchedResponse;
 import com.example.appmanagementsystem.service.ApplicationService;
 import jakarta.validation.Valid;
@@ -27,5 +28,10 @@ public class ApplicationController {
     @GetMapping
     public List<ApplicationSearchedResponse> searchApplications(@RequestParam String name) {
         return applicationService.searchApplications(name);
+    }
+
+    @GetMapping("/dropdown")
+    public List<ApplicationDropdownResponse> getApplicationsForDropdown() {
+        return applicationService.getApplicationsForDropdown();
     }
 }
