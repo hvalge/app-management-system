@@ -14,5 +14,8 @@ export default {
   },
   searchAppServices(name: string) {
     return axios.get(`${API_URL}/appservices`, { params: { name } });
+  },
+  fetchApplications() {
+    return axios.get(`${API_URL}/applications`);
   }
 };
